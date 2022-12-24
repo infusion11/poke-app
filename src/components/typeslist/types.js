@@ -114,11 +114,11 @@ const Types = () => {
             <div className='listDiv'>
                 <h2>Poke app</h2>
                 
-                <select id="typeSelect" value={selected} onChange={setSel}>
-                    <option defaultValue={null} hidden>Select type!</option>
+                <select id="typeSelect" key={'sel'} value={selected} onChange={setSel}>
+                    <option defaultValue={''} key={'type'} hidden>Select type!</option>
                     {options.map( ( {name, url} ) => {
                     return(
-                        <option key={url} value={url}>{name}</option>
+                        <option key={`${url}`} value={url}>{name}</option>
                         )
                 })}
                 </select>
@@ -139,20 +139,20 @@ const Types = () => {
                         </div>
                     </div>}
 
-                    {!isWaiting && currentPokemons.map( ( {pokemon, index} ) => {
+                    {!isWaiting && currentPokemons.map( ( {pokemon} ) => {
                         if(!isChecked){
                             if(!catchedPokemons.includes(pokemon.name)){
                                 return(
-                                    <div className='singlePokemon'>
-                                    <Link to={`/profile/${pokemon.name}`} key={index} value={pokemon.url}>
+                                    <div className='singlePokemon' key={pokemon.name}>
+                                    <Link to={`/profile/${pokemon.name}`} value={pokemon.url}>
                                         {pokemon.name}
                                     </Link>
                                     </div>
                                     )
                             }
                             return(
-                                <div className='singlePokemon singleCatchedPokemon'>
-                                <Link to={`/profile/${pokemon.name}`} key={index} value={pokemon.url}>
+                                <div className='singlePokemon singleCatchedPokemon' key={pokemon.name}>
+                                <Link to={`/profile/${pokemon.name}`} value={pokemon.url}>
                                     {pokemon.name}
                                 </Link>
                                 </div>
@@ -161,8 +161,8 @@ const Types = () => {
                         else{
                             if(catchedPokemons.includes(pokemon.name)){
                                 return(
-                                    <div className='singlePokemon singleCatchedPokemon'>
-                                    <Link to={`/profile/${pokemon.name}`} key={index} value={pokemon.url}>
+                                    <div className='singlePokemon singleCatchedPokemon' key={pokemon.name}>
+                                    <Link to={`/profile/${pokemon.name}`} value={pokemon.url}>
                                         {pokemon.name}
                                     </Link>
                                     </div>
